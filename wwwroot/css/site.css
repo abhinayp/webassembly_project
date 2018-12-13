@@ -1,0 +1,24 @@
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.game-table {
+    width: 100%;
+    height: 100vh;
+}
+
+.game-cell {
+    border: 1px solid rgba(111, 124, 143, 0.8);
+    background-color: rgb(196, 195, 195);
+}
+
+.trap-cell, .trap-cell:hover {
+    background-color: rgba(30, 30, 30, 1);
+}
+
+.trap-cell-success, .trap-cell-success:hover {
+    background-color: rgb(2, 172, 78);
+}
+

@@ -1,0 +1,21 @@
+﻿@page "/"
+
+@functions {
+    IList<Game> game = new List<Game>();
+    int max_x = 15;
+    int max_y = 15;
+}
+
+<table class="game-table" width="100%">
+    @foreach (var x in Enumerable.Range(1, max_x))
+    {
+      <tr>
+        @foreach (var y in Enumerable.Range(1, max_y))
+        {
+          <td class="game-cell">
+          </td>
+        }
+      </tr>
+    }
+
+</table>
