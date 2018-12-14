@@ -2,20 +2,140 @@
 
 @functions {
     IList<Game> game = new List<Game>();
-    int max_x = 15;
-    int max_y = 15;
+    IList<Trap> traps = TrapList.generateTraps();
+    IList<Trap> clickedBlocks = new List<Trap>();
+    IList<Trap> everything = allBlocks();
+    Dictionary<string, string> classNames = new Dictionary<string, string>();
+    static int max_x = Values.x;
+    static int max_y = Values.y;
+    bool lost = false;
+    bool win = false;
+    string className = "";
+
+    static IList<Trap> allBlocks() {
+
+      IList<Trap> allBlocks = new List<Trap>();
+      foreach (int x in Enumerable.Range(0, max_x)) {
+        foreach (int y in Enumerable.Range(0, max_y)) {
+          Trap t = new Trap() {x=x, y=y};
+          allBlocks.Add(t);
+        }
+      }
+      return allBlocks;
+    }
+
+    bool completed() {
+      IEnumerable<Trap> tr = everything.Where(i => clickedBlocks.Where(t => t.x == i.x && t.y == i.y).Count() == 0);
+      Console.WriteLine(tr.Count());
+      Console.WriteLine(traps.Count);
+      if (tr.Count() == traps.Count) {
+        return true;
+      }
+      return false;
+    }
+
+    void AddToClicked(int x, int y)
+    {
+      Trap clickedBlock = new Trap() {
+        x = x,
+        y = y
+      };
+      Trap trap = traps.Where(t => t.x == x && t.y == y).FirstOrDefault();
+      int index = clickedBlocks.IndexOf(clickedBlock);
+      checkIfItIsCloser(x, y);
+      if (index < 0) {
+        clickedBlocks.Add(clickedBlock);
+      }
+      if (trap != null) {
+        lost = true;
+      }
+      bool completed_game = completed();
+      if (completed_game) {
+        win = true;
+      }
+    }
+
+    void checkIfItIsCloser(int x, int y) {
+      Trap danger1 = traps.Where(t => x == t.x - 3 && y == t.y - 3).FirstOrDefault();
+      Trap danger2 = traps.Where(t => x == t.x - 2 && y == t.y - 2).FirstOrDefault();
+      Trap danger3 = traps.Where(t => x == t.x - 1 && y == t.y - 1).FirstOrDefault();
+      string x_string = x.ToString();
+      string y_string = y.ToString();
+
+      string key_string = x_string + y_string;
+      if (danger1 != null) {
+        classNames[key_string] = "cell-danger3";
+      }
+      if (danger2 != null) {
+        classNames[key_string] = "cell-danger2";
+      }
+      if (danger3 != null) {
+        classNames[key_string] =  "cell-danger1";
+      }
+
+
+    }
+
 }
 
+
 <table class="game-table" width="100%">
-    @foreach (var x in Enumerable.Range(1, max_x))
+
+    @foreach (int x in Enumerable.Range(0, max_x))
     {
       <tr>
-        @foreach (var y in Enumerable.Range(1, max_y))
+        @foreach (int y in Enumerable.Range(0, max_y))
         {
-          <td class="game-cell">
-          </td>
+          Trap clicked = clickedBlocks.Where(t => t.x == x && t.y == y).FirstOrDefault();
+          Trap trap = traps.Where(t => t.x == x && t.y == y).FirstOrDefault();
+          string x_string = x.ToString();
+          string y_string = y.ToString();
+          string key_string = x_string + y_string;
+          string classname_string = "";
+          if (classNames.ContainsKey(key_string)) {
+            classname_string = classNames[key_string];
+          }
+
+          @if (clicked != null && trap == null) {
+            <td class="game-cell trap-cell @classname_string">
+            </td>
+          }
+          else if ((clicked != null || lost) && trap != null) {
+            <td class="game-cell trap-cell-danger">
+            </td>
+          }
+          else {
+            <td class="game-cell c-pointer" onclick=@(() => AddToClicked(x, y))>
+            </td>
+          }
         }
       </tr>
     }
 
 </table>
+
+@if (lost) {
+  <div class="modal show" id="myModal" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <h1 class="text-danger text-center p-3 font-weight-light">You Lost</h1>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-backdrop show"></div>
+}
+
+@if (win) {
+  <div class="modal show" id="myModal" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <h1 class="text-success text-center p-3 font-weight-light">You Won</h1>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-backdrop show"></div>
+}

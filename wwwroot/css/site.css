@@ -18,7 +18,25 @@ html, body {
     background-color: rgba(30, 30, 30, 1);
 }
 
-.trap-cell-success, .trap-cell-success:hover {
-    background-color: rgb(2, 172, 78);
+.trap-cell-danger, .trap-cell-danger:hover {
+    background-color: rgb(145, 37, 37);
 }
 
+.cell-danger1, .cell-danger1:hover {
+    background-color: rgb(170, 60, 60);
+}
+
+.cell-danger2, .cell-danger2:hover {
+    background-color: rgb(209, 102, 102);
+}
+
+.cell-danger3, .cell-danger3:hover {
+    background-color: rgb(240, 174, 174);
+
+}
+
+
+
+.c-pointer {
+    cursor: pointer;
+}

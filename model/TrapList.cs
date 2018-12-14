@@ -8,25 +8,32 @@ public class TrapList
     {
     }
 
-    public Trap[] generateTraps()
+    public static IList<Trap> generateTraps()
     {
 
         Random rnd = new Random();
-        int numOfTraps = rnd.Next(15, 26);
-        Trap[] trapList = new Trap[numOfTraps];
+        int numOfTraps = rnd.Next(Values.rand_min, Values.rand_max);
+        IList<Trap> trapList = new List<Trap>();
 
         for (int i = 0; i <= numOfTraps; i++)
         {
-            int x = rnd.Next(0, 15);
-            int y = rnd.Next(0, 15);
+            int x = rnd.Next(0, Values.x);
+            int y = rnd.Next(0, Values.y);
             Trap t = new Trap();
             t.x = x;
             t.y = y;
-            trapList[i] = t;
-            Console.WriteLine(trapList);
+            trapList.Add(t);
         }
 
 
         return trapList;
     }
+}
+
+public class Values {
+    public static int x = 7;
+    public static int y = 7;
+
+    public static int rand_min = 1;
+    public static int rand_max = 2;
 }
