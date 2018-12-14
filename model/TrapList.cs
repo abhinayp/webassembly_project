@@ -31,9 +31,9 @@ public class TrapList
 }
 
 public class Values {
-    public static int x = 7;
-    public static int y = 7;
+    public static int x = 8;
+    public static int y = 8;
 
     public static int rand_min = 1;
-    public static int rand_max = 2;
+    public static int rand_max = 3;
 }

@@ -26,8 +26,6 @@
 
     bool completed() {
       IEnumerable<Trap> tr = everything.Where(i => clickedBlocks.Where(t => t.x == i.x && t.y == i.y).Count() == 0);
-      Console.WriteLine(tr.Count());
-      Console.WriteLine(traps.Count);
       if (tr.Count() == traps.Count) {
         return true;
       }
@@ -72,7 +70,6 @@
       if (danger3 != null) {
         classNames[key_string] =  "cell-danger1";
       }
-
 
     }
 
