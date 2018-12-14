@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace final_project
+namespace webassembly_project
 {
     public class Program
     {

@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "final_project", "final_project.csproj", "{67F30CB8-ED1E-423C-9045-7A6D8F53AAEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webassembly_project", "webassembly_project.csproj", "{67F30CB8-ED1E-423C-9045-7A6D8F53AAEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
